@@ -1,16 +1,10 @@
 //CRUD: create, read, update, delete
 
-// const mongodb = require('mongodb')
-// const MongoClient = mongodb.MongoClient
-// const ObjectID = mongodb.ObjectID
 const {MongoClient, ObjectID} = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
-const id = new ObjectID()
-console.log(id)
-console.log(id.id.length)
-console.log(id.toHexString().length)
+
 
 MongoClient.connect(connectionURL, {useUnifiedTopology:true}, (error, client)=>{
     if(error){
@@ -20,49 +14,39 @@ MongoClient.connect(connectionURL, {useUnifiedTopology:true}, (error, client)=>{
 
     const db = client.db(databaseName)
 
-    // db.collection('users').insertOne({
-    //     name: 'Rasit 3',
-    //     age:34
-    // }, (error, result) => {
+
+    // db.collection('users').findOne({_id: new ObjectID("602c1f8983dcad1776c7a6d8")},(error, user) => {
     //     if(error){
-    //         return console.log('Unable to insert user!')
+    //         return console.log('Unable to fetch!')
     //     }
 
-    //     console.log(result.ops)
+    //     console.log(user)
     // })
 
-    // db.collection('users').insertMany([
-    //     {
-    //         name: 'Aysgl',
-    //         age: 29
-    //     },{
-    //         name: 'Alyosa',
-    //         age:2
-    //     }
-    // ], (error, result) => {
-    //     if(error){
-    //         return console.log('Unable to insert documents!')
-    //     }
+    //find return Cursor and it has so many methods.
+    // db.collection('users').find({name:'Rasit'}).toArray((error, users)=>{
+    //     console.log(users)
+    // })
+    
 
-    //     console.log(result.ops)
+    // db.collection('users').find({name:'Rasit'}).count((error, count)=>{
+    //     console.log(count)
     // })
 
-    // db.collection('tasks').insertMany([
-    //     {
-    //         description: 'Hard work',
-    //         completed: false
-    //     },{
-    //         description: 'change job',
-    //         completed:false
-    //     },{
-    //         description: 'Study for new subjects',
-    //         completed: true
-    //     }
-    // ], (error, result) => {
-    //     if(error){
-    //         return console.log('Unable to insert task documents!')
-    //     }
+    db.collection('tasks').findOne({_id: new ObjectID("602c23e6c3c4c9185bf11e3f")}, (error, task) =>{
+        if(error){
+            return console.log('Unable to fetch task!')
+        }
 
-    //     console.log(result.ops)
-    // })
+        console.log(task)
+        console.log()
+    })
+
+    db.collection('tasks').find({completed: false}).toArray((error, tasks)=>{
+        if(error){
+            return console.log('Unable to fetch tasks!')
+        }
+
+        console.log(tasks)
+    })
 })
