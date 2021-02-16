@@ -14,39 +14,39 @@ MongoClient.connect(connectionURL, {useUnifiedTopology:true}, (error, client)=>{
 
     const db = client.db(databaseName)
 
-
-    // db.collection('users').findOne({_id: new ObjectID("602c1f8983dcad1776c7a6d8")},(error, user) => {
-    //     if(error){
-    //         return console.log('Unable to fetch!')
+    // db.collection('users').updateOne({
+    //     _id:new ObjectID("602c20d00e3cb717995b022c")
+    // },{
+    //     $set:{
+    //         name: 'Rasiter'
     //     }
-
-    //     console.log(user)
+    // }).then((result)=>{
+    //     console.log(result)
+    // }).catch((error)=>{
+    //     console.log(error)
     // })
 
-    //find return Cursor and it has so many methods.
-    // db.collection('users').find({name:'Rasit'}).toArray((error, users)=>{
-    //     console.log(users)
+    // db.collection('users').updateOne({
+    //     name:'Alyosa'
+    // },{
+    //     $inc:{
+    //         age: -1
+    //     }
+    // }).then((result)=>{
+    //     console.log(result)
+    // }).catch((error)=>{
+    //     console.log(error)
     // })
-    
 
-    // db.collection('users').find({name:'Rasit'}).count((error, count)=>{
-    //     console.log(count)
-    // })
-
-    db.collection('tasks').findOne({_id: new ObjectID("602c23e6c3c4c9185bf11e3f")}, (error, task) =>{
-        if(error){
-            return console.log('Unable to fetch task!')
+    db.collection('tasks').updateMany({
+        completed: false
+    },{
+        $set:{
+            completed:true
         }
-
-        console.log(task)
-        console.log()
-    })
-
-    db.collection('tasks').find({completed: false}).toArray((error, tasks)=>{
-        if(error){
-            return console.log('Unable to fetch tasks!')
-        }
-
-        console.log(tasks)
+    }).then((result)=>{
+        console.log(result)
+    }).catch((error)=>{
+        console.log(error)
     })
 })
