@@ -5,7 +5,7 @@ const { removeListener, find } = require("../models/task");
 const auth = async (req, res, next)=>{
     try{
         const token = req.header('Authorization').replace('Bearer ', '')
-        const decoded = jwt.verify(token, 'thisisthecourse')
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
         //bu kullanıcı için bu token oluşturulmuş mu
         const user = await User.findOne({_id:decoded._id, 'tokens.token': token})
        if(!user){

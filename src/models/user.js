@@ -58,7 +58,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = async function(){
     user = this
-    const token = jwt.sign({_id : user._id.toString()}, 'thisisthecourse')
+    const token = jwt.sign({_id : user._id.toString()}, process.env.JWT_SECRET)
     user.tokens = user.tokens.concat({token})
     await user.save()
     return token
@@ -104,7 +104,7 @@ userSchema.pre('save', async function(next){
     try {
         if(user.isModified('password')){
             user.password = await bcrypt.hash(user.password,8)
-            console.log('changing password')
+            console.log('setting password')
         }
         next()
     } catch (e) {
