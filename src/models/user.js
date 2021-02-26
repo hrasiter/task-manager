@@ -104,7 +104,6 @@ userSchema.pre('save', async function(next){
     try {
         if(user.isModified('password')){
             user.password = await bcrypt.hash(user.password,8)
-            console.log('setting password')
         }
         next()
     } catch (e) {
