@@ -23,9 +23,11 @@
   "dependencies": {
     "bcrypt": "^3.0.0",
     "express": "^4.17.1",
+    "hbs": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.17",
     "multer": "^1.4.2",
+    "request": "^2.88.2",
     "sharp": "",
     "validator": "^13.5.2"
   }
